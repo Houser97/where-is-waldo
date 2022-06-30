@@ -3,6 +3,7 @@ footer {
     background-color: rgb(4, 113, 238);
     color: white;
     font-size: 16px;
+    font-weight: 100;
     display: flex;
     align-items: center;
     justify-content: center;
