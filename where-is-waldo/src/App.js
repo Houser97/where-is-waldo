@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import './App.css';
 import image from './images/adventure-time.png';
 import Navbar from './components/header';
@@ -25,7 +25,7 @@ function App() {
     const heightImage = imgRef.current.offsetHeight;
 
     let relX = Math.round((x/widthImage)*100);
-    let relY = Math.round((y/heightImage)*100);
+    let relY = Math.round(((y)/heightImage)*100);
 
     return [relX, relY];
   }
@@ -33,7 +33,7 @@ function App() {
   function checkIfSelected(selectedX, selectedY){
     /* Finn coordinantes */
       let solutionX = 46;
-      let solutionY = 45;
+      let solutionY = 30;
     
       let distance = Math.sqrt(Math.pow(selectedX-solutionX,2)+Math.pow(selectedY-solutionY,2));
       /*console.log(`Y final: ${solutionY}`);
@@ -44,8 +44,8 @@ function App() {
     }
 
   const eventDIV = (e) => {
-    let x = e.clientX;
-    let y = e.pageY;
+    let x = e.pageX;
+    let y = (e.pageY-140);
 
     let relX;
     let relY;
@@ -60,18 +60,16 @@ function App() {
     console.log(`y: ${relY}`);
   } 
 
-  useEffect(() => {
-    const fullHeight = document.querySelector(".full-height");
-    fullHeight.addEventListener("click", eventDIV);
-  })
 
 
   return (
     <div className="App">
       <div className='full-height'>
         <Navbar />
-        <img src={image} alt='cartoon-network' className='img-project' ref={imgRef}></img>
-        <div className='magic-div' ref={square}></div>
+        <div className='image-container'>
+          <img src={image} alt='cartoon-network' className='img-project' ref={imgRef} onClick = {eventDIV}></img>
+          <div className='magic-div' ref={square}></div>
+        </div>
         <Footer />
       </div>
     </div>

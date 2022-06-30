@@ -3,6 +3,7 @@
 header {
     width: 100%;
     min-height: 140px;
+    max-height: 140px;
     background-color: rgb(4, 113, 238);
     color: white;
     font-size: 40px;
