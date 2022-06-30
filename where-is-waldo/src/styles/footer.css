@@ -8,4 +8,9 @@ footer {
     align-items: center;
     justify-content: center;
     font-family: 'Titan One', cursive;
+    gap: 10px;
+}
+
+.github {
+    width: 30px; height: 30px;
 }

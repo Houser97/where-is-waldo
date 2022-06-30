@@ -32,8 +32,8 @@ function App() {
 
   function checkIfSelected(selectedX, selectedY){
     /* Finn coordinantes */
-      let solutionX = 46;
-      let solutionY = 30;
+      let solutionX = 44;
+      let solutionY = 39;
     
       let distance = Math.sqrt(Math.pow(selectedX-solutionX,2)+Math.pow(selectedY-solutionY,2));
       /*console.log(`Y final: ${solutionY}`);
