@@ -30,19 +30,19 @@ header {
     display: flex; flex-flow: column;
     width: 300px;
     
-    align-items: center; justify-content: center;
+    align-items: center; justify-content: center; text-align: center;
     
 }
 
 .characters-DIV .characters {
     display: flex; flex-flow: row;
     width: 100%;
-    justify-content: space-evenly; align-items: center;
+    justify-content: space-between; align-items: center;
 }
 
 .characters-DIV .characters .photo-name {
-    display: flex; flex-flow: column;
-    font-size: 15px;
+    display: flex; flex-flow: column; justify-content: center; align-items: center;
+    font-size: 14px;
 }
 
 .characters-DIV .characters .photo-name .character {
@@ -58,6 +58,10 @@ header {
 
     .logo {
         width: 250px;
+    }
+
+    .characters-DIV .characters .photo-name {
+        font-size: 10px;
     }
 }
 
