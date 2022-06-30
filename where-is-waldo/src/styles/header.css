@@ -50,3 +50,27 @@ header {
     border: 1px solid white;
     border-radius: 10px;
 }
+
+@media (max-width: 830px) {
+    header{
+        font-size: 30px;
+    }
+
+    .logo {
+        width: 250px;
+    }
+}
+
+@media (max-width: 700px) {
+    header{
+        font-size: 25px;
+    }
+
+    .logo {
+        width: 200px;
+    }
+
+    .characters-DIV .characters .photo-name .character {
+        height: 40px; width: 40px;
+    }
+}
