@@ -9,6 +9,9 @@ function App() {
 
   const imgRef = useRef(null);
   const square = useRef(null);
+  const firstLi = useRef(null);
+  const secondLi = useRef(null);
+  const thirdLi = useRef(null);
 
   const adjustSelectingSquare = (x,y) =>{
     const width = square.current.offsetWidth/2;
@@ -60,7 +63,10 @@ function App() {
     console.log(`y: ${relY}`);
   } 
 
-
+  const getValueLi = (e) => {
+    const li = e.target.textContent;
+    console.log(li);
+  }
 
   return (
     <div className="App">
@@ -68,7 +74,15 @@ function App() {
         <Navbar />
         <div className='image-container'>
           <img src={image} alt='cartoon-network' className='img-project' ref={imgRef} onClick = {eventDIV}></img>
-          <div className='magic-div' ref={square}></div>
+          <div className='magic-div' ref={square}>
+            <div className='container-list'>
+              <ul className='list-characters'>
+                <li className='li-element' ref={firstLi} onClick = {getValueLi}>BMO</li>
+                <li className='li-element middle' ref={secondLi} onClick = {getValueLi}>Marceline</li>
+                <li className='li-element' ref={thirdLi} onClick = {getValueLi}>Tree Trunks</li>
+              </ul>
+            </div>
+          </div>
         </div>
         <Footer />
       </div>
