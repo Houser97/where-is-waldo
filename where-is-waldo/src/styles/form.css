@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+
+.popup-form {
+    position: absolute;
+    height: 100%; width: 100%;
+    display: flex; flex-flow: column;
+    align-items: center; justify-content: center;
+    gap: 20px;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.45);
+    font-family: 'Titan One', cursive;
+}
+
+.popup-form .win {
+    font-size: 40px;
+    color: gold;
+    text-align: center;
+}
+
+.popup-form .form {
+    width: 250px; height: 250px;
+    display: flex; flex-flow: column;
+    align-items: center; justify-content: space-between;
+    gap: 20px;
+    border-radius: 10px;
+    background-color: #c2c2c2;
+    padding: 20px;
+}
+
+.popup-form .form .form-title{
+    font-size: 20px;
+    height: 80px;
+    width: 100%;
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center; justify-content: center;
+    text-align: center;
+}
+
+.popup-form .form .input-section{
+    display: flex; flex-flow: column;
+    gap: 10px;
+    height: 30%;
+}
+
+.popup-form .form .input-section input {
+    border: none;
+    height: 30px;
+    border-radius: 10px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.popup-form .form .input-section label {
+    
+}
+
+.popup-form .form .button-section{
+    display: flex; flex-flow: column;
+    height: 50px;
+    width: 80px;
+    cursor: pointer;
+}
+
+.submit {
+    background-color: rgb(30, 85, 204);
+    border: none;
+    height: 80%;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
