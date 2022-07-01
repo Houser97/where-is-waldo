@@ -3,6 +3,7 @@ import './App.css';
 import image from './images/adventure-time.png';
 import Navbar from './components/header';
 import Footer from './components/footer';
+import { getCoordsBackEnd } from './firebase';
 
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
   const firstLi = useRef(null);
   const secondLi = useRef(null);
   const thirdLi = useRef(null);
+
+  let coordsUser = {};
 
   const adjustSelectingSquare = (x,y) =>{
     const width = square.current.offsetWidth/2;
@@ -33,10 +36,7 @@ function App() {
     return [relX, relY];
   }
 
-  function checkIfSelected(selectedX, selectedY){
-    /* Finn coordinantes */
-      let solutionX = 44;
-      let solutionY = 39;
+  function checkIfSelected(selectedX, selectedY, solutionX, solutionY, character){
     
       let distance = Math.sqrt(Math.pow(selectedX-solutionX,2)+Math.pow(selectedY-solutionY,2));
       /*console.log(`Y final: ${solutionY}`);
@@ -44,6 +44,12 @@ function App() {
       console.log(`X solution: ${solutionX}`);
       console.log(`Y solution: ${solutionY}`);*/
       console.log(`Distance: ${distance}`);
+
+      if(distance < 12){
+        console.log(`You hit ${character}`);
+      } else {
+        console.log("Keep trying");
+      }
     }
 
   const eventDIV = (e) => {
@@ -55,7 +61,9 @@ function App() {
 
     adjustSelectingSquare(x,y);
     [relX, relY] = createRelativeCoordinates(x,y);
-    checkIfSelected(relX,relY)
+
+
+    coordsUser = {coordX: relX, coordY: relY};
     
     /*console.log(`y: ${y}`);
     console.log(`x: ${x}`);*/
@@ -63,9 +71,13 @@ function App() {
     console.log(`y: ${relY}`);
   } 
 
-  const getValueLi = (e) => {
+  const getValueLi = async (e) => {
     const li = e.target.textContent;
-    console.log(li);
+    const coords = await getCoordsBackEnd(li);
+    let coordsSolution = "";
+    coords.forEach(doc => coordsSolution = doc.data())
+    checkIfSelected(coordsUser.coordX, coordsUser.coordY, coordsSolution.coordX,
+      coordsSolution.coordY, coordsSolution.character);
   }
 
   return (

@@ -14,5 +14,20 @@ const firebaseConfig = {
   appId: "1:501165901982:web:6d3b339286fbd4c0cf938f"
 };
 
+// Recuperar coordenadas //
+export const getCoordsBackEnd = (characterName) => {
+    let doc = '';
+    if(characterName === 'BMO'){
+        doc = "solutionBMO";
+    } else if(characterName === "Marceline"){
+        doc = "solution-marceline";
+    } else{
+        doc = "solution-tree-trunk";
+    } 
+    return getDocs(collection(db,doc));
+} 
+
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getFirestore();
