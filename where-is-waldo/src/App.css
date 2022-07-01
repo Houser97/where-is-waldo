@@ -16,7 +16,7 @@
   max-width: 1350px; max-height: 550px; */
 
 .magic-div{
-  display: flex;
+  display: none;
   position: absolute;
   top: 0px; left: 0px;
   width: 70px; height: 70px;
@@ -53,6 +53,8 @@
   border-radius: 10px;
   overflow: hidden;
   font-size: 15px;
+  display: flex; flex-flow: column;
+  justify-content: space-evenly;
 }
 
 .list-characters .middle {

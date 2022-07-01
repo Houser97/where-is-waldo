@@ -47,12 +47,28 @@ function App() {
 
       if(distance < 12){
         console.log(`You hit ${character}`);
+        removeCharacterFromList(character);
       } else {
         console.log("Keep trying");
       }
     }
 
+  const removeCharacterFromList = (character) => {
+    let element;
+        if(character === "Tree Trunks"){
+          element = thirdLi.current;
+        } else if(character === "BMO"){
+          element = firstLi.current;
+        } else{
+          element=secondLi.current;
+        }
+        element.style.display = "none";
+  }
+
   const eventDIV = (e) => {
+    const magicDiv = square.current;
+    magicDiv.style.display = "flex";
+
     let x = e.pageX;
     let y = (e.pageY-140);
 
@@ -89,9 +105,9 @@ function App() {
           <div className='magic-div' ref={square}>
             <div className='container-list'>
               <ul className='list-characters'>
-                <li className='li-element' ref={firstLi} onClick = {getValueLi}>BMO</li>
-                <li className='li-element middle' ref={secondLi} onClick = {getValueLi}>Marceline</li>
-                <li className='li-element' ref={thirdLi} onClick = {getValueLi}>Tree Trunks</li>
+                <li className='li-element BMO' ref={firstLi} onClick = {getValueLi}>BMO</li>
+                <li className='li-element middle Marceline' ref={secondLi} onClick = {getValueLi}>Marceline</li>
+                <li className='li-element Tree-Trunks' ref={thirdLi} onClick = {getValueLi}>Tree Trunks</li>
               </ul>
             </div>
           </div>
