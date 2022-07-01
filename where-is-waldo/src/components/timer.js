@@ -18,7 +18,6 @@ const Timer = () => {
 
         return () => {
             clearInterval(intervalId);
-            console.log("remove");
             getTime(seconds);
         };
     }, [gameOver, getTime, seconds]);

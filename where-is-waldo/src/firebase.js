@@ -15,7 +15,7 @@ const firebaseConfig = {
 };
 
 // Recuperar coordenadas //
-export const getCoordsBackEnd = (characterName) => {
+export const getCoordsBackEnd = async (characterName) => {
     let doc = '';
     if(characterName === 'BMO'){
         doc = "solutionBMO";
@@ -24,7 +24,7 @@ export const getCoordsBackEnd = (characterName) => {
     } else{
         doc = "solution-tree-trunk";
     } 
-    return getDocs(collection(db,doc));
+    return await getDocs(collection(db,doc)).catch(doc => console.log("error"));
 } 
 
 

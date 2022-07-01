@@ -17,12 +17,12 @@ function App() {
   const secondLi = useRef(null);
   const thirdLi = useRef(null);
 
-  let coordsUser = {};
 
   const [toggle, setToggle] = useState("hidden");
   const [message, setMessage] = useState("Houser");
   const [isGameOver, setIsGameOver] = useState("continueGame");
   const [numberOfCharacters, setNumberOfCharacters] = useState(3);
+  const [coordsUser, setCoordsUser] = useState({coordX: 0, coordY: 0})
 
   useEffect(() => {
     const intervalId = setTimeout(() => {
@@ -61,12 +61,19 @@ function App() {
   }
 
   function checkIfSelected(selectedX, selectedY, solutionX, solutionY, character){
-    
-      let distance = Math.sqrt(Math.pow(selectedX-solutionX,2)+Math.pow(selectedY-solutionY,2));
+      console.log(`SolutionX ${solutionX}`);
+      console.log(`SolutionY ${solutionY}`);
+      console.log(`SelectedX ${selectedX}`);
+      console.log(`SelectedY ${selectedY}`);
+      let componentX = Math.pow(Math.abs(selectedX-solutionX),2);
+      let componentY = Math.pow(Math.abs(selectedY-solutionY),2)
+      let distance = Math.round(Math.sqrt(componentX+componentY));
       /*console.log(`Y final: ${solutionY}`);
       console.log(`distance: ${distance}`);
       console.log(`X solution: ${solutionX}`);
-      console.log(`Y solution: ${solutionY}`);*/
+      console.log(`Y solution: ${solutionY}`);
+      console.log(`componentX: ${componentX}`);
+      console.log(`componentY: ${componentY}`);*/
       console.log(`Distance: ${distance}`);
 
       if(distance < 5){
@@ -99,8 +106,14 @@ function App() {
     const magicDiv = square.current;
     magicDiv.style.display = "flex";
 
-    let x = e.pageX;
-    let y = (e.pageY-140);
+    let x = 0;
+    let y = 0;
+
+    x = e.pageX;
+    y = e.pageY-140;
+
+    /*console.log(`x raw: ${x}`);
+    console.log(`y raw: ${y}`);*/
 
     let relX;
     let relY;
@@ -108,13 +121,16 @@ function App() {
     adjustSelectingSquare(x,y);
     [relX, relY] = createRelativeCoordinates(x,y);
 
+    console.log(`Rel x raw: ${relX}`);
+    console.log(`Rel y raw: ${relY}`);
 
-    coordsUser = {coordX: relX, coordY: relY};
+
+    setCoordsUser({coordX: relX, coordY: relY});
     
     /*console.log(`y: ${y}`);
-    console.log(`x: ${x}`);*/
-    console.log(`x: ${relX}`);
-    console.log(`y: ${relY}`);
+    console.log(`x: ${x}`);
+    console.log(`x: ${typeof(relX)}`);
+    console.log(`y: ${typeof(relY)}`);*/
   } 
 
   const getValueLi = async (e) => {
@@ -125,9 +141,11 @@ function App() {
     const coords = await getCoordsBackEnd(li);
     let coordsSolution = "";
     coords.forEach(async doc => coordsSolution = doc.data())
-    console.log(coordsSolution.coordX)
-    console.log(coordsSolution.coordY)
+    /*console.log(`Coord Solution X: ${coordsSolution.coordX}`)
+    console.log(`Coord Solution Y: ${coordsSolution.coordY}`)
     console.log(coordsSolution.character)
+    console.log(`Coord Selected X: ${coordsUser.coordX}`)
+    console.log(`Coord Selected Y: ${coordsUser.coordY}`)*/
     checkIfSelected(coordsUser.coordX, coordsUser.coordY, coordsSolution.coordX,
       coordsSolution.coordY, coordsSolution.character);
   }
@@ -142,7 +160,6 @@ function App() {
   }
 
   const getTime = (seconds) => {
-    console.log(seconds+1);
   }
 
   return (
