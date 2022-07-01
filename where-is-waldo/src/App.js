@@ -22,7 +22,9 @@ function App() {
   const [message, setMessage] = useState("Houser");
   const [isGameOver, setIsGameOver] = useState("continueGame");
   const [numberOfCharacters, setNumberOfCharacters] = useState(3);
-  const [coordsUser, setCoordsUser] = useState({coordX: 0, coordY: 0})
+  const [coordsUser, setCoordsUser] = useState({coordX: 0, coordY: 0});
+  const [finalTimeUser, setFinalTimeUser] = useState(0);
+  const [username, setUsername] = useState(0);
 
   useEffect(() => {
     const intervalId = setTimeout(() => {
@@ -61,20 +63,20 @@ function App() {
   }
 
   function checkIfSelected(selectedX, selectedY, solutionX, solutionY, character){
-      console.log(`SolutionX ${solutionX}`);
-      console.log(`SolutionY ${solutionY}`);
-      console.log(`SelectedX ${selectedX}`);
-      console.log(`SelectedY ${selectedY}`);
       let componentX = Math.pow(Math.abs(selectedX-solutionX),2);
       let componentY = Math.pow(Math.abs(selectedY-solutionY),2)
       let distance = Math.round(Math.sqrt(componentX+componentY));
-      /*console.log(`Y final: ${solutionY}`);
+      /*console.log(`SolutionX ${solutionX}`);
+      console.log(`SolutionY ${solutionY}`);
+      console.log(`SelectedX ${selectedX}`);
+      console.log(`SelectedY ${selectedY}`);
+      console.log(`Y final: ${solutionY}`);
       console.log(`distance: ${distance}`);
       console.log(`X solution: ${solutionX}`);
       console.log(`Y solution: ${solutionY}`);
       console.log(`componentX: ${componentX}`);
-      console.log(`componentY: ${componentY}`);*/
-      console.log(`Distance: ${distance}`);
+      console.log(`componentY: ${componentY}`);
+      console.log(`Distance: ${distance}`);*/
 
       if(distance < 5){
         /*console.log(`You hit ${character}`);*/
@@ -121,8 +123,8 @@ function App() {
     adjustSelectingSquare(x,y);
     [relX, relY] = createRelativeCoordinates(x,y);
 
-    console.log(`Rel x raw: ${relX}`);
-    console.log(`Rel y raw: ${relY}`);
+    /*console.log(`Rel x raw: ${relX}`);
+    console.log(`Rel y raw: ${relY}`);*/
 
 
     setCoordsUser({coordX: relX, coordY: relY});
@@ -155,11 +157,16 @@ function App() {
     const popUpForm = e.target.parentNode;
     popUpForm.style.display = "none";
     let name = [...e.target];
-    console.log(name[0].value);
+    let userName = name[0].value;
+    setUsername(userName);
+    /*console.log(name[0].value);*/
     e.target.reset();
   }
 
   const getTime = (seconds) => {
+    if(isGameOver === "stopGame"){
+      setFinalTimeUser(previousTime => previousTime + seconds +1);
+    }
   }
 
   return (
