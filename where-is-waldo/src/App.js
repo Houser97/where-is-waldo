@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import { createContext, useEffect, useRef, useState } from 'react';
 import './App.css';
 import image from './images/adventure-time.png';
 import Navbar from './components/header';
 import Footer from './components/footer';
 import { getCoordsBackEnd } from './firebase';
 import Message from './components/message';
+import Form from './components/form';
 
+export const gameoverContext = createContext();
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
 
   const [toggle, setToggle] = useState("hidden");
   const [message, setMessage] = useState("Houser");
+  const [isGameOver, setIsGameOver] = useState("continueGame");
+  const [numberOfCharacters, setNumberOfCharacters] = useState(3);
 
   useEffect(() => {
     const intervalId = setTimeout(() => {
@@ -29,6 +33,12 @@ function App() {
       clearTimeout(intervalId);
     }
   }, [toggle])
+
+  useEffect(() => {
+    if(numberOfCharacters === 0){
+      setIsGameOver("stopGame");
+    }
+  }, [numberOfCharacters])
 
   const adjustSelectingSquare = (x,y) =>{
     const width = square.current.offsetWidth/2;
@@ -59,11 +69,12 @@ function App() {
       console.log(`Y solution: ${solutionY}`);*/
       console.log(`Distance: ${distance}`);
 
-      if(distance < 12){
+      if(distance < 5){
         /*console.log(`You hit ${character}`);*/
         removeCharacterFromList(character);
         setToggle("show");
         setMessage(`You have found ${character}!`);
+        setNumberOfCharacters(number => number - 1);
       } else {
         /*console.log("Keep trying");*/
         setToggle("show-incorrect");
@@ -107,34 +118,56 @@ function App() {
   } 
 
   const getValueLi = async (e) => {
+    const magicDiv = square.current;
+    magicDiv.style.display = "none";
+
     const li = e.target.textContent;
     const coords = await getCoordsBackEnd(li);
     let coordsSolution = "";
-    coords.forEach(doc => coordsSolution = doc.data())
+    coords.forEach(async doc => coordsSolution = doc.data())
+    console.log(coordsSolution.coordX)
+    console.log(coordsSolution.coordY)
+    console.log(coordsSolution.character)
     checkIfSelected(coordsUser.coordX, coordsUser.coordY, coordsSolution.coordX,
       coordsSolution.coordY, coordsSolution.character);
   }
 
+  const getUserName = (e) => {
+    e.preventDefault();
+    const popUpForm = e.target.parentNode;
+    popUpForm.style.display = "none";
+    let name = [...e.target];
+    console.log(name[0].value);
+    e.target.reset();
+  }
+
+  const getTime = (seconds) => {
+    console.log(seconds+1);
+  }
+
   return (
-    <div className="App">
-      <div className='full-height'>
-        <Navbar />
-        <div className='image-container'>
-          <img src={image} alt='cartoon-network' className='img-project' ref={imgRef} onClick = {eventDIV}></img>
-          <Message toggleMessage={toggle} message = {message} />
-          <div className='magic-div' ref={square}>
-            <div className='container-list'>
-              <ul className='list-characters'>
-                <li className='li-element BMO' ref={firstLi} onClick = {getValueLi}>BMO</li>
-                <li className='li-element middle Marceline' ref={secondLi} onClick = {getValueLi}>Marceline</li>
-                <li className='li-element Tree-Trunks' ref={thirdLi} onClick = {getValueLi}>Tree Trunks</li>
-              </ul>
+    <gameoverContext.Provider value={[isGameOver, getTime]}>
+      <div className="App">
+        <div className='full-height'>
+          <Navbar />
+          <Form getUserName={getUserName} gameOver = {isGameOver} />
+          <div className='image-container'>
+            <img src={image} alt='cartoon-network' className='img-project' ref={imgRef} onClick = {eventDIV}></img>
+            <Message toggleMessage={toggle} message = {message} />
+            <div className='magic-div' ref={square}>
+              <div className='container-list'>
+                <ul className='list-characters'>
+                  <li className='li-element BMO' ref={firstLi} onClick = {getValueLi}>BMO</li>
+                  <li className='li-element middle Marceline' ref={secondLi} onClick = {getValueLi}>Marceline</li>
+                  <li className='li-element Tree-Trunks' ref={thirdLi} onClick = {getValueLi}>Tree Trunks</li>
+                </ul>
+              </div>
             </div>
           </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
-    </div>
+    </gameoverContext.Provider>
   );
 }
 

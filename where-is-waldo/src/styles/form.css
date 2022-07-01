@@ -3,16 +3,21 @@
 .popup-form {
     position: absolute;
     height: 100%; width: 100%;
-    display: flex; flex-flow: column;
+    display: none; flex-flow: column;
     align-items: center; justify-content: center;
     gap: 20px;
     z-index: 10;
     background-color: rgba(0, 0, 0, 0.45);
     font-family: 'Titan One', cursive;
+    box-sizing: border-box; 
+}
+
+.stopGame {
+    display: flex;
 }
 
 .popup-form .win {
-    font-size: 40px;
+    font-size: 60px;
     color: gold;
     text-align: center;
 }
@@ -38,7 +43,7 @@
 }
 
 .popup-form .form .input-section{
-    display: flex; flex-flow: column;
+    display: flex; flex-flow: column; justify-content: center; align-items: center;
     gap: 10px;
     height: 30%;
 }
@@ -49,11 +54,10 @@
     border-radius: 10px;
     outline: none;
     box-sizing: border-box;
+    padding: 0px 20px;
+    width: 90%;
 }
 
-.popup-form .form .input-section label {
-    
-}
 
 .popup-form .form .button-section{
     display: flex; flex-flow: column;
@@ -70,4 +74,5 @@
     color: white;
     font-size: 16px;
     font-weight: 600;
+    cursor: pointer;
 }
