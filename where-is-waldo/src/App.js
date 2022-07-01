@@ -6,6 +6,7 @@ import Footer from './components/footer';
 import { getCoordsBackEnd } from './firebase';
 import Message from './components/message';
 import Form from './components/form';
+import Ladderboard from './components/ladderboard';
 
 export const gameoverContext = createContext();
 
@@ -175,6 +176,7 @@ function App() {
         <div className='full-height'>
           <Navbar />
           <Form getUserName={getUserName} gameOver = {isGameOver} />
+          <Ladderboard />
           <div className='image-container'>
             <img src={image} alt='cartoon-network' className='img-project' ref={imgRef} onClick = {eventDIV}></img>
             <Message toggleMessage={toggle} message = {message} />
