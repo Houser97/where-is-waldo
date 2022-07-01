@@ -1,9 +1,10 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import image from './images/adventure-time.png';
 import Navbar from './components/header';
 import Footer from './components/footer';
 import { getCoordsBackEnd } from './firebase';
+import Message from './components/message';
 
 
 function App() {
@@ -15,6 +16,19 @@ function App() {
   const thirdLi = useRef(null);
 
   let coordsUser = {};
+
+  const [toggle, setToggle] = useState("hidden");
+  const [message, setMessage] = useState("Houser");
+
+  useEffect(() => {
+    const intervalId = setTimeout(() => {
+      setToggle("hidden");
+    }, 2000);
+
+    return () => {
+      clearTimeout(intervalId);
+    }
+  }, [toggle])
 
   const adjustSelectingSquare = (x,y) =>{
     const width = square.current.offsetWidth/2;
@@ -46,10 +60,15 @@ function App() {
       console.log(`Distance: ${distance}`);
 
       if(distance < 12){
-        console.log(`You hit ${character}`);
+        /*console.log(`You hit ${character}`);*/
         removeCharacterFromList(character);
+        setToggle("show");
+        setMessage(`You have found ${character}!`);
       } else {
-        console.log("Keep trying");
+        /*console.log("Keep trying");*/
+        setToggle("show-incorrect");
+        setMessage(character);
+        setMessage("Keep trying")
       }
     }
 
@@ -102,6 +121,7 @@ function App() {
         <Navbar />
         <div className='image-container'>
           <img src={image} alt='cartoon-network' className='img-project' ref={imgRef} onClick = {eventDIV}></img>
+          <Message toggleMessage={toggle} message = {message} />
           <div className='magic-div' ref={square}>
             <div className='container-list'>
               <ul className='list-characters'>

@@ -1,0 +1,27 @@
+.message {
+    position: absolute;
+    display: none; align-items: center; justify-content: center;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    margin: auto;
+    width: 200px;
+    height: 40px;
+    background-color: rgb(21, 188, 46);
+    color: rgb(4, 4, 4);
+    border-radius: 5px;
+    border: 3px solid rgb(255, 255, 255);
+}
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: flex;
+}
+
+.show-incorrect {
+    display: flex;
+    background-color: rgb(188, 74, 21);
+}
