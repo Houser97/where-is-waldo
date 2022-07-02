@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/where-is-waldo/static/css/main.0ee08736.css",
+    "main.js": "/where-is-waldo/static/js/main.a190a8be.js",
+    "static/js/787.9220c6c0.chunk.js": "/where-is-waldo/static/js/787.9220c6c0.chunk.js",
+    "static/media/adventure-time.png": "/where-is-waldo/static/media/adventure-time.25d264ab918ffbcf7d6c.png",
+    "static/media/Adventure-time-logo.png": "/where-is-waldo/static/media/Adventure-time-logo.e0a526d2854169855526.png",
+    "index.html": "/where-is-waldo/index.html",
+    "main.0ee08736.css.map": "/where-is-waldo/static/css/main.0ee08736.css.map",
+    "main.a190a8be.js.map": "/where-is-waldo/static/js/main.a190a8be.js.map",
+    "787.9220c6c0.chunk.js.map": "/where-is-waldo/static/js/787.9220c6c0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0ee08736.css",
+    "static/js/main.a190a8be.js"
+  ]
+}
