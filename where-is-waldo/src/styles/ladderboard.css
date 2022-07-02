@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
 
 .ladderboard-section {
-    display: flex; flex-flow: column;
+    display: none; flex-flow: column;
     align-items: center; justify-content: center;
     position: absolute;
     z-index: 10;

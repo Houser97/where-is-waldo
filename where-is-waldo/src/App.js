@@ -3,7 +3,7 @@ import './App.css';
 import image from './images/adventure-time.png';
 import Navbar from './components/header';
 import Footer from './components/footer';
-import { getCoordsBackEnd } from './firebase';
+import { getCoordsBackEnd, saveData } from './firebase';
 import Message from './components/message';
 import Form from './components/form';
 import Ladderboard from './components/ladderboard';
@@ -42,6 +42,13 @@ function App() {
       setIsGameOver("stopGame");
     }
   }, [numberOfCharacters])
+
+  useEffect(() => {
+    if(username !== 0 && finalTimeUser !== 0){
+      saveData(username, finalTimeUser);
+    }
+    
+  }, [username, finalTimeUser])
 
   const adjustSelectingSquare = (x,y) =>{
     const width = square.current.offsetWidth/2;
@@ -166,7 +173,7 @@ function App() {
 
   const getTime = (seconds) => {
     if(isGameOver === "stopGame"){
-      setFinalTimeUser(previousTime => previousTime + seconds +1);
+      setFinalTimeUser(previousTime => previousTime + seconds);
     }
   }
 

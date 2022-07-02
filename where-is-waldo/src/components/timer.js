@@ -16,11 +16,14 @@ const Timer = () => {
             }, 1000)
         }
 
+        if(gameOver === "stopGame"){
+            getTime(seconds);
+        }
+
         return () => {
             clearInterval(intervalId);
-            getTime(seconds);
         };
-    }, [gameOver, getTime, seconds]);
+    }, [gameOver]);
 
 
     function time_convert(num){ 

@@ -27,6 +27,11 @@ export const getCoordsBackEnd = async (characterName) => {
     return await getDocs(collection(db,doc)).catch(doc => console.log("error"));
 } 
 
+/* Guardar datos del jugador */
+export const saveData = async (name, time) => {
+    await addDoc(collection(db, "Scores"), {name,time});
+}
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
