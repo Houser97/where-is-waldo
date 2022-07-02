@@ -9,7 +9,6 @@
   display: flex; flex-flow: column;
   position: relative;
   flex: 1; width: 100%;
-  background-color: rgb(191, 66, 66);
 }
 
 /* min-width: 1350px; min-height: 550px;
