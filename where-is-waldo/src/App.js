@@ -182,6 +182,7 @@ function App() {
             <div className='image-container'>
               <img src={image} alt='cartoon-network' className='img-project' ref={imgRef} onClick = {eventDIV}></img>
               <Message toggleMessage={toggle} message = {message} />
+              <div className='credits'>Photo by: <a href='https://www.reddit.com/r/adventuretime/comments/bvr37b/the_land_of_ooo_adventure_time_by_tom_preston/'>Tom Preston</a></div>
               <div className='magic-div' ref={square}>
                 <div className='container-list'>
                   <ul className='list-characters'>
