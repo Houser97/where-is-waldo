@@ -1,6 +1,12 @@
 import '../styles/form.css';
 
 const Form = ({getUserName, gameOver}) => {
+
+    const openLadderboard = () => {
+        const ladder =document.querySelector(".ladderboard-section");
+        ladder.style.display = "flex";
+    }
+
     return(
         <div className={`popup-form ${gameOver}`}>
             <div className='win'>You win!</div>
@@ -11,7 +17,7 @@ const Form = ({getUserName, gameOver}) => {
                     <input id='name' name='name' required></input>
                 </div>
                 <div className='button-section'>
-                    <button className='submit'>Submit</button>
+                    <button className='submit' onClick={openLadderboard}>Submit</button>
                 </div>
             </form>
         </div>

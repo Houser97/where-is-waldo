@@ -3,12 +3,13 @@ import './App.css';
 import image from './images/adventure-time.png';
 import Navbar from './components/header';
 import Footer from './components/footer';
-import { getCoordsBackEnd, saveData } from './firebase';
+import { getCoordsBackEnd } from './firebase';
 import Message from './components/message';
 import Form from './components/form';
 import Ladderboard from './components/ladderboard';
 
 export const gameoverContext = createContext();
+export const userContext = createContext();
 
 function App() {
 
@@ -42,13 +43,6 @@ function App() {
       setIsGameOver("stopGame");
     }
   }, [numberOfCharacters])
-
-  useEffect(() => {
-    if(username !== 0 && finalTimeUser !== 0){
-      saveData(username, finalTimeUser);
-    }
-    
-  }, [username, finalTimeUser])
 
   const adjustSelectingSquare = (x,y) =>{
     const width = square.current.offsetWidth/2;
@@ -179,27 +173,29 @@ function App() {
 
   return (
     <gameoverContext.Provider value={[isGameOver, getTime]}>
-      <div className="App">
-        <div className='full-height'>
-          <Navbar />
-          <Form getUserName={getUserName} gameOver = {isGameOver} />
-          <Ladderboard />
-          <div className='image-container'>
-            <img src={image} alt='cartoon-network' className='img-project' ref={imgRef} onClick = {eventDIV}></img>
-            <Message toggleMessage={toggle} message = {message} />
-            <div className='magic-div' ref={square}>
-              <div className='container-list'>
-                <ul className='list-characters'>
-                  <li className='li-element BMO' ref={firstLi} onClick = {getValueLi}>BMO</li>
-                  <li className='li-element middle Marceline' ref={secondLi} onClick = {getValueLi}>Marceline</li>
-                  <li className='li-element Tree-Trunks' ref={thirdLi} onClick = {getValueLi}>Tree Trunks</li>
-                </ul>
+      <userContext.Provider value={[username, finalTimeUser]}>
+        <div className="App">
+          <div className='full-height'>
+            <Navbar />
+            <Form getUserName={getUserName} gameOver = {isGameOver} />
+            <Ladderboard />
+            <div className='image-container'>
+              <img src={image} alt='cartoon-network' className='img-project' ref={imgRef} onClick = {eventDIV}></img>
+              <Message toggleMessage={toggle} message = {message} />
+              <div className='magic-div' ref={square}>
+                <div className='container-list'>
+                  <ul className='list-characters'>
+                    <li className='li-element BMO' ref={firstLi} onClick = {getValueLi}>BMO</li>
+                    <li className='li-element middle Marceline' ref={secondLi} onClick = {getValueLi}>Marceline</li>
+                    <li className='li-element Tree-Trunks' ref={thirdLi} onClick = {getValueLi}>Tree Trunks</li>
+                  </ul>
+                </div>
               </div>
             </div>
+            <Footer />
           </div>
-          <Footer />
         </div>
-      </div>
+        </userContext.Provider>
     </gameoverContext.Provider>
   );
 }

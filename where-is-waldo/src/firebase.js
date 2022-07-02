@@ -27,6 +27,11 @@ export const getCoordsBackEnd = async (characterName) => {
     return await getDocs(collection(db,doc)).catch(doc => console.log("error"));
 } 
 
+// Recuperar ladderboard //
+export const getLadderboard = async () => {
+    return getDocs(collection(db,"Scores"));
+}
+
 /* Guardar datos del jugador */
 export const saveData = async (name, time) => {
     await addDoc(collection(db, "Scores"), {name,time});
@@ -34,5 +39,6 @@ export const saveData = async (name, time) => {
 
 
 // Initialize Firebase
+// eslint-disable-next-line no-unused-vars
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
